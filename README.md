@@ -40,3 +40,7 @@ Herokuにデプロイをする
 ```
 git push heroku `pushするブランチ名`:master
 ```
+デプロイ完了後、データベースの移行を行う
+```
+$heroku run rails db:migrate
+```
