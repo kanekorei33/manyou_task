@@ -1,0 +1,19 @@
+ja:
+  activerecord:
+    models:
+      task: タスク
+    attributes:
+      task:
+        title: タイトル
+        content: 内容
+    tasks:
+      index:
+        title: 'タイトル'
+        content: '内容'
+        show: '詳細'
+        edit: '編集'
+        destroy: '消去'
+        new_task: '新規作成'
+      new:
+        title: 'タイトル'
+        content: '内容'
