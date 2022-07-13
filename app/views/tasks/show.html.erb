@@ -15,5 +15,10 @@
   <%= @task.deadline %>
 </p>
 
+<p>
+  <strong><%= t('view.status') %>:</strong>
+  <%= t("enums.task.status.#{@task.status}") %>
+</p>
+
 <%= link_to t('view.edit'), edit_task_path(@task) %> |
 <%= link_to t('view.back'), tasks_path %>

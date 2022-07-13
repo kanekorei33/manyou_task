@@ -28,9 +28,9 @@
 
     <div class="field">
     <%= form.label :status %>
-    <%= form.date_field :status %>
-    <%= form.select :prefecture, Address.prefectures.keys, {prompt: "選択してください"}, class: "prefecture-select" %>
+    <%= form.select :status, Task.statuses.keys.map {|k| [t("enums.task.status.#{k}"), k]} %>
   </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

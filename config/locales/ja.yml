@@ -210,6 +210,10 @@ ja:
     content: '内容'
     created_at: '登録日'
     deadline: '終了期限'
+    status: 'ステータス'
+    not_yet: '未着手'
+    doing: '着手中'
+    done: '完了'
     show: '詳細'
     edit: '編集'
     destroy: '消去'
@@ -220,3 +224,10 @@ ja:
     successfully_created: 'タスクを作成しました'
     successfully_updated: 'タスクを編集しました'
     successfully_destroyed: 'タスクを消去しました'
+  enums:
+    task:
+      status:
+        not_yet: '未着手'
+        doing: '着手中'
+        done: '完了'
+

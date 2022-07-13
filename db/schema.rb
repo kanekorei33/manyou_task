@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2022_07_12_090815) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deadline", default: -> { "now()" }, null: false
-    t.integer "status"
+    t.integer "status", default: 0
   end
 
 end
