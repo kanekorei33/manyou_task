@@ -20,5 +20,10 @@
   <%= t("enums.task.status.#{@task.status}") %>
 </p>
 
+<p>
+  <strong><%= t('view.priority') %>:</strong>
+  <%= t("enums.task.priority.#{@task.priority}") %>
+</p>
+
 <%= link_to t('view.edit'), edit_task_path(@task) %> |
 <%= link_to t('view.back'), tasks_path %>

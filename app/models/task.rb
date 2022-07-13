@@ -5,4 +5,5 @@ class Task < ApplicationRecord
   enum status: {
     not_yet:0,doing:1,done:2
   }
+  enum priority:[:high, :medium, :low]
 end
