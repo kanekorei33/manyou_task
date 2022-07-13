@@ -6,8 +6,12 @@ class TasksController < ApplicationController
     @tasks = Task.all.order(created_at: "DESC")
     @tasks = Task.all.order(deadline: "DESC") if params[:sort_expired]
     @tasks = Task.all.order(priority: "ASC") if params[:sort_priority]
+    @tasks = Task.all.search(params[:search])
   end
 
+  # def search_field(title, status)
+  #   Tags::SearchField.new(title, status).render
+  # end
   # GET /tasks/1 or /tasks/1.json
   def show
   end

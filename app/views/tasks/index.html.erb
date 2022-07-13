@@ -4,6 +4,14 @@
 
 <table>
   <thead>
+  <tr>
+    <th><h2>タイトル検索</h2>
+      <%= form_tag(root_path, method: :get)do %>
+      <%= text_field_tag :search %>
+      <%= submit_tag 'Search', name: nil %>
+      <% end %>
+    </th>
+  </tr>
     <tr>
       <th><%= t('view.title') %></th>
       <th><%= t('view.content') %></th>
