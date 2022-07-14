@@ -4,14 +4,19 @@
 
 <table>
   <thead>
-  <tr>
-    <th><h2>タイトル検索</h2>
-      <%= form_tag(root_path, method: :get)do %>
-      <%= text_field_tag :search %>
-      <%= submit_tag 'Search', name: nil %>
+
+      <%= form_with(scope: :search, url: tasks_path, method: :get, local: true) do |f| %>
+        <h2>タイトル検索</h2>
+        <%= f.label :title_search %>
+        <%= f.text_field :title_search %>
+
+        <h2>ステータス検索</h2>
+        <%= f.label :status_search %>
+        <%= f.select :status_search, Task.statuses.keys.map {|k| [t("enums.task.status.#{k}"), k]},{prompt: '---'} %>
+
+        <%= f.submit '検索' %>
       <% end %>
-    </th>
-  </tr>
+
     <tr>
       <th><%= t('view.title') %></th>
       <th><%= t('view.content') %></th>

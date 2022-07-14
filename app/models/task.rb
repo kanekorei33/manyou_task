@@ -10,7 +10,4 @@ class Task < ApplicationRecord
     high:0, medium:1, low:2
   }
 
-  def self.search(search)
-    search ? where('title LIKE ?',"%#{search}%") : all
-  end
 end

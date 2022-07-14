@@ -6,13 +6,12 @@ class TasksController < ApplicationController
     @tasks = Task.all.order(created_at: "DESC")
     @tasks = Task.all.order(deadline: "DESC") if params[:sort_expired]
     @tasks = Task.all.order(priority: "ASC") if params[:sort_priority]
-    @tasks = Task.all.search(params[:search])
+    if params[:search]
+    @tasks = Task.where('title LIKE ?',"%#{params[:search][:title_search]}%") if params[:search][:title_search].present?
+    @tasks = Task.where(status: params[:search][:status_search]) if params[:search][:status_search].present?
+    end
   end
 
-  # def search_field(title, status)
-  #   Tags::SearchField.new(title, status).render
-  # end
-  # GET /tasks/1 or /tasks/1.json
   def show
   end
 
