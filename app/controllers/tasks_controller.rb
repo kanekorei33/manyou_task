@@ -7,12 +7,12 @@ class TasksController < ApplicationController
     @tasks = Task.all.order(deadline: "DESC") if params[:sort_expired]
     @tasks = Task.all.order(priority: "ASC") if params[:sort_priority]
     if params[:search]
-      if params[:search][:title_search].present?
-        @tasks = Task.where('title LIKE ?',"%#{params[:search][:title_search]}%").where(status: params[:search][:status_search])
+      if params[:search][:title_search].present? && params[:search][:status_search].present?
+        @tasks = Task.search_and(params[:search][:title_search], params[:search][:status_search])
       elsif params[:search][:status_search].present?
-        @tasks = Task.where(status: params[:search][:status_search])
+        @tasks = Task.status_search(params[:search][:status_search])
       elsif  params[:search][:title_search].present?
-        @tasks = Task.where('title LIKE ?',"%#{params[:search][:title_search]}%")
+        @tasks = Task.title_search(params[:search][:title_search])
       end
     end
   end
