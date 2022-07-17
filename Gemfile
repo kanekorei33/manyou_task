@@ -22,6 +22,7 @@ group :development, :test do
   gem 'faker'
   gem 'launchy'
   gem 'spring-commands-rspec'
+  gem 'pry-rails'
 end
 
 group :development do
@@ -37,3 +38,5 @@ group :test do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'kaminari'

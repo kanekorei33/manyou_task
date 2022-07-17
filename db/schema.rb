@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2022_07_13_032355) do
     t.datetime "deadline", default: -> { "now()" }, null: false
     t.integer "status", default: 0
     t.integer "priority", default: 0
+    t.index ["title"], name: "index_tasks_on_title"
   end
 
 end

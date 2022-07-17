@@ -1,10 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Tasks</h1>
-
 <table>
   <thead>
-
       <%= form_with(scope: :search, url: tasks_path, method: :get, local: true) do |f| %>
         <h2>タイトル検索</h2>
         <%= f.label :title_search %>
@@ -44,9 +42,10 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
+
 
 <%= link_to t('view.new_task'), new_task_path %>
 <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>
 <%= link_to "優先順位が高い順でソートする", tasks_path(sort_priority: "true") %>
+<%= paginate @tasks %>
