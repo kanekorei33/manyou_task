@@ -4,6 +4,7 @@ class TasksController < ApplicationController
   # GET /tasks or /tasks.json
   def index
     @tasks = Task.all.order(created_at: "DESC")
+    #binding pry
     @tasks = Task.all.order(deadline: "DESC") if params[:sort_expired]
     @tasks = Task.all.order(priority: "ASC") if params[:sort_priority]
     if params[:search]
@@ -15,7 +16,7 @@ class TasksController < ApplicationController
         #@tasks = Task.title_search(params[:search][:title_search])
       #end
     end
-    @tasks = Task.page(params[:page]).per(3)
+    @tasks = Task.page(params[:page]).per(4)
   end
 
   def show
