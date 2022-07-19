@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'タスク管理機能', type: :system do
   let!(:task) { FactoryBot.create(:task, title: 'first_task', deadline: Date.today) }
-  let!(:task2) {FactoryBot.create(:task, title: 'second_task', deadline: Date.today +1 ) }
+  let!(:task2) {FactoryBot.create(:task, title: 'second_task', deadline: Date.today+1 ) }
         #FactoryBot.create(:task, title: "task", status:"done")
       #FactoryBot.create(:second_task, title: "sample", status:"not_yet")
 
@@ -13,9 +13,9 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in "task[title]", with: "タスク表示"
         fill_in "task[content]", with: "テストします"
         fill_in "task[deadline]", with: Date.today
-        select "task[status]", with: "doing"
+        select "着手中", from: "task_status"
         click_on "Create タスク"
-        expect(page).to have_content 'タスク表示'
+        expect(page).to have_content "タスク表示"
       end
     end
   end
@@ -60,24 +60,26 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'タイトルであいまい検索をした場合' do
       it "検索キーワードを含むタスクで絞り込まれる" do
         visit tasks_path
-        fill_in "task[title_search]", with: "task"
-        click_button "検索"
+        fill_in "search_title_search", with: "task"
+        click_on "検索"
         expect(page).to have_content 'task'
       end
     end
     context 'ステータス検索をした場合' do
       it "ステータスに完全一致するタスクが絞り込まれる" do
-        select "done", from: "task[status_search]"
+        visit tasks_path
+        select "完了", from: "search_status_search"
         click_on '検索'
         expect(page).to have_content '完了'
       end
     end
     context 'タイトルのあいまい検索とステータス検索をした場合' do
       it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
-        fill_in "task[title_search]", with: "test_third"
-        select "done", from: "search[status_search]"
+        visit tasks_path
+        fill_in "search_title_search", with: "sample"
+        select "未着手", from: "search_status_search"
         click_on '検索'
-        expect(page).to have_content "test_third", "doing"
+        expect(page).to have_content "sample"
       end
     end
   end

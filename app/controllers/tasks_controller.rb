@@ -16,7 +16,7 @@ class TasksController < ApplicationController
         #@tasks = Task.title_search(params[:search][:title_search])
       #end
     end
-    @tasks = Task.page(params[:page]).per(4)
+    @tasks = @tasks.page(params[:page]).per(4)
   end
 
   def show
