@@ -11,6 +11,7 @@
 | title |  string |
 | content |  string |
 
+
 モデル名：label
 |  カラム名 |  データ型 |
 | ---- | ---- |
