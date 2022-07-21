@@ -23,6 +23,7 @@ group :development, :test do
   gem 'launchy'
   gem 'spring-commands-rspec'
   gem 'pry-rails'
+  gem 'bcrypt'
 end
 
 group :development do

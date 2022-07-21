@@ -3,13 +3,14 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all.order(created_at: "DESC")
+    @tasks = current_user.tasks
+    @tasks = @tasks.order(created_at: "DESC")
     #binding pry
-    @tasks = Task.all.order(deadline: "DESC") if params[:sort_expired]
-    @tasks = Task.all.order(priority: "ASC") if params[:sort_priority]
+    @tasks = @tasks.order(deadline: "DESC") if params[:sort_expired]
+    @tasks = @tasks.order(priority: "ASC") if params[:sort_priority]
     if params[:search]
       #if params[:search][:title_search].present? && params[:search][:status_search].present?
-        @tasks = Task.search_and(params[:search][:title_search], params[:search][:status_search]).status_search(params[:search][:status_search]).title_search(params[:search][:title_search])
+        @tasks = @tasks.search_and(params[:search][:title_search], params[:search][:status_search]).status_search(params[:search][:status_search]).title_search(params[:search][:title_search])
       #elsif params[:search][:status_search].present?
         #@tasks = Task.status_search(params[:search][:status_search])
       #elsif  params[:search][:title_search].present?
@@ -33,7 +34,7 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
 
     respond_to do |format|
       if @task.save
