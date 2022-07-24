@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update ]
+  before_action :admin_user, only: %i[ destroy ]#アクション前に事前確認用。
   skip_before_action :login_required, only: %i[ new create ]
   # GET /users or /users.json
   def index
@@ -8,7 +9,9 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
+    redirect_to tasks_path unless params[:id] == current_user.id.to_s
     @user = User.find(params[:id])
+    @tasks = @user.tasks
   end
 
   # GET /users/new
@@ -55,11 +58,13 @@ class UsersController < ApplicationController
   # DELETE /users/1 or /users/1.json
   def destroy
     @user.destroy
-
     respond_to do |format|
       format.html { redirect_to users_url, notice: "User was successfully destroyed." }
       format.json { head :no_content }
     end
+    User.find(params[:id]).destroy
+    flash[:success] = "ユーザー削除完了"
+    redirect_to users_path
   end
 
   private
@@ -73,10 +78,9 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :task_id)
   end
 
-  def correct_user
-    unless User.find(params[:id]).user.id.to_i == current_user.id
-        redirect_to tasks_path(current_user)
-        flash[:notice] = "権限がありません"
-    end
+  #管理者か確認。
+  def admin_user
+    redirect_to(root_path) unless current_user.admin?
   end
+
 end

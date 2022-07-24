@@ -206,6 +206,7 @@ ja:
       short: "%m/%d %H:%M"
     pm: 午後
   view:
+    user: "名前"
     title: 'タイトル'
     content: '内容'
     created_at: '登録日'
