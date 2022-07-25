@@ -1,31 +1,35 @@
- <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-        <% user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <%= form_with(model: [:admin, @user], local: true) do |f| %>
-
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<h1>テスト</h1>
+<%= form_with(model: [:admin, @user], local: true) do |f| %>
+<div class="field">
   <%= f.label :admin %>
-  <%= f.select :admin, Task.admins.keys, {prompt: "選択してください"} %>
-
+  <%= f.check_box :admin %>
+</div>
+<div class="field">
   <%= f.label :name %>
   <%= f.text_field :name %>
-
+</div>
+<div class="field">
   <%= f.label :email %>
   <%= f.email_field :email %>
-
+</div>
+<div class="field">
   <%= f.label :password %>
   <%= f.password_field :password %>
-
+</div>
+<div class="field">
   <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %>
-
-  <%= f.submit "Create my account" %>
+</div>
+  <%= f.submit "登録する" %>
 <% end %>

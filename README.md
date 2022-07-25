@@ -1,27 +1,34 @@
 モデル名：user
-|  カラム名 |  データ型 |
+| カラム名 | データ型 |
 | ---- | ---- |
-| name |  string |
-| email |  string |
-| password_digest |  string |
+| name | string |
+| email | string |
+| email | index |
+| password_digest | string |
+| admin | boolean |
 
 モデル名：task
-|  カラム名 |  データ型 |
+| カラム名 | データ型 |
 | ---- | ---- |
-| title |  string |
-| content |  string |
-
+| title | string |
+| title | index |
+| content | string |
+| deadline | datetime |
+| status | integer |
+| priority | integer |
+| user_id | bigint |
+| user_id | index |
 
 モデル名：label
-|  カラム名 |  データ型 |
+| カラム名 | データ型 |
 | ---- | ---- |
-| label |  string |
+| label | string |
 
 モデル名：task_label
-|  カラム名 |  データ型 |
+| カラム名 | データ型 |
 | ---- | ---- |
-| task_id |  string |
-| label_id |  string |
+| task_id | string |
+| label_id | string |
 
 
 ##Heroku デプロイ手順

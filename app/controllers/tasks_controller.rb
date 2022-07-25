@@ -4,9 +4,10 @@ class TasksController < ApplicationController
   # GET /tasks or /tasks.json
   def index
     @tasks = current_user.tasks
-    @tasks = @tasks.order(created_at: "DESC")
+    #@tasks = @tasks.order(created_at: "DESC")
     #binding pry
     @tasks = @tasks.order(deadline: "DESC") if params[:sort_expired]
+    #binding pry
     @tasks = @tasks.order(priority: "ASC") if params[:sort_priority]
     if params[:search]
       #if params[:search][:title_search].present? && params[:search][:status_search].present?
@@ -17,7 +18,7 @@ class TasksController < ApplicationController
         #@tasks = Task.title_search(params[:search][:title_search])
       #end
     end
-    @tasks = @tasks.page(params[:page]).per(4)
+    @tasks = @tasks.order(created_at: "DESC").page(params[:page]).per(4)
   end
 
   def show
