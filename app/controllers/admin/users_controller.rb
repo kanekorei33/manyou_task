@@ -45,7 +45,7 @@ before_action :set_user, only: %i[ show edit update destroy ]
  #   binding.pry
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to admin_user_path, notice: "アドミンユーザーを消去しました"
+    redirect_to admin_users_path, notice: "アドミンユーザーを消去しました"
   end
 
   private

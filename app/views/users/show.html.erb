@@ -43,4 +43,6 @@
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'task一覧', tasks_path %> |
+<% if current_user.admin? %>
 <%= link_to '管理一覧', admin_users_path %>
+<% end %>
