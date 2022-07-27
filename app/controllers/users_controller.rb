@@ -16,8 +16,7 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    redirect_to tasks_path if logged_in?
-    flash[:notice] = "すでにあなたはログインしてます"
+    redirect_to tasks_path if current_user.present?
     @user = User.new
   end
 
@@ -62,9 +61,6 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url, notice: "User was successfully destroyed." }
       format.json { head :no_content }
     end
-    User.find(params[:id]).destroy
-    flash[:success] = "ユーザー削除完了"
-    redirect_to users_path
   end
 
   private

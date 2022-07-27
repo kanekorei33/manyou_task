@@ -4,7 +4,6 @@ FactoryBot.define do
     email { "kocha@gmail.com" }
     password { "123456" }
     admin { "true" }
-    id {101}
   end
 
   factory :user_second,class: User do
@@ -12,7 +11,6 @@ FactoryBot.define do
     email { "upaupa@gmail.com" }
     password { "123456" }
     admin { "false" }
-    id {102}
   end
 
   factory :admin_user,class: User do
@@ -20,6 +18,5 @@ FactoryBot.define do
     email { "admin_2@gmail.com" }
     password { "123456" }
     admin { "true" }
-    id {103}
   end
 end

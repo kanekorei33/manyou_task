@@ -7,11 +7,15 @@ FactoryBot.define do
     #association :user ,factory::admin_user
   end
   factory :second_task, class: Task do
-    title { 'Factoryで作ったデフォルトのタイトル２' }
-    content { 'Factoryで作ったデフォルトのコンテント２' }
+    title { 'Factoryで作ったデフォルトのタイトル2' }
+    content { 'Factoryで作ったデフォルトのコンテント2' }
     deadline { Date.today+1 }
     created_at { Date.today+1}
-    
   end
-
+  factory :third_task, class: Task do
+    title { 'Factoryで作ったデフォルトのタイトル3' }
+    content { 'Factoryで作ったデフォルトのコンテント3' }
+    deadline { Date.today+2 }
+    created_at { Date.today+2}
+  end
 end
