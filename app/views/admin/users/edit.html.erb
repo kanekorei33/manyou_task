@@ -1,0 +1,7 @@
+<h1>ユーザの編集</h1>
+
+<%= link_to 'Show', admin_user_path(@user) %>
+<%= link_to '一覧', admin_users_path %>
+
+<%= render 'form', locals: { user: @user } %>
+

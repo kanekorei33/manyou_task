@@ -1,11 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe 'タスク管理機能', type: :system do
-  let!(:task) { FactoryBot.create(:task, title: 'first_task', deadline: Date.today) }
-  let!(:task2) {FactoryBot.create(:task, title: 'second_task', deadline: Date.today+1 ) }
-        #FactoryBot.create(:task, title: "task", status:"done")
-      #FactoryBot.create(:second_task, title: "sample", status:"not_yet")
-
+  let!(:user) {FactoryBot.create(:user)}
+  let!(:task) {FactoryBot.create(:task,user: user) }
+  let!(:second_task){ FactoryBot.create(:second_task,user: user) }
+  let!(:third_task){FactoryBot.create(:third_task,user: user) }
+  before do
+    visit new_session_path
+    fill_in 'session[email]', with: 'kocha@gmail.com'
+    fill_in 'session[password]', with: '123456'
+    click_on 'commit'
+  end
   describe '新規作成機能' do
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
@@ -23,28 +28,28 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '一覧画面に遷移した場合' do
       it '作成済みのタスク一覧が表示される' do
         visit tasks_path
-        expect(page).to have_content 'first_task'
+        expect(page).to have_content 'Factoryで作ったデフォルトのタイトル3'
       end
     end
     context 'タスクが作成日時の降順に並んでいる場合' do
       it '新しいタスクが一番上に表示される' do
         visit tasks_path
         task_list = all('.task_row')[0]
-        expect(page.text).to match 'first_task'
+        expect(page.text).to match 'Factoryで作ったデフォルトのタイトル3'
       end
     end
     context 'タスクが終了期限の降順に並んでいる場合'
       it '終了期限が近いタスクが一番上に表示される' do
         visit tasks_path
         task_list = all('.task_row')[0]
-        expect(page.text).to match 'second_task'
+        expect(page.text).to match 'test_title'
       end
   end
 
   describe '詳細表示機能' do
      context '任意のタスク詳細画面に遷移した場合' do
        it '該当タスクの内容が表示される' do
-        @task = FactoryBot.create(:task, title: 'first')
+        @task = FactoryBot.create(:task, title: 'first', user: user)
         visit task_path(@task.id)
         expect(page).to have_content 'first'
        end
@@ -53,8 +58,8 @@ RSpec.describe 'タスク管理機能', type: :system do
 
   describe '検索機能' do
     before do
-      FactoryBot.create(:task, title: "task", status: "done")
-      FactoryBot.create(:second_task, title: "sample", status: "not_yet")
+      FactoryBot.create(:task, title: "task", status: "done", user: user)
+      FactoryBot.create(:second_task, title: "sample", status: "not_yet", user:user)
     end
 
     context 'タイトルであいまい検索をした場合' do
