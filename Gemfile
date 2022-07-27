@@ -11,7 +11,7 @@ gem 'webpacker', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 
-
+gem 'bcrypt'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
@@ -23,7 +23,6 @@ group :development, :test do
   gem 'launchy'
   gem 'spring-commands-rspec'
   gem 'pry-rails'
-  gem 'bcrypt'
 end
 
 group :development do
