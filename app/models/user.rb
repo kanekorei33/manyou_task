@@ -9,6 +9,7 @@ class User < ApplicationRecord
   before_destroy :admin_cannot_delete
   has_many :tasks, dependent: :destroy
 
+
   private
 
   def admin_cannot_update
