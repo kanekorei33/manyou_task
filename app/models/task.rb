@@ -2,6 +2,8 @@ class Task < ApplicationRecord
   belongs_to :user
   validates :title, presence: true
   validates :content, presence: true
+  has_many :task_labels, dependent: :destroy
+  has_many :labels, through: :task_labels
 
   enum status: {
     not_yet:0,doing:1,done:2

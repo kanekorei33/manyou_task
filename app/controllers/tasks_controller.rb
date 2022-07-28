@@ -9,9 +9,11 @@ class TasksController < ApplicationController
     @tasks = @tasks.order(deadline: "DESC") if params[:sort_expired]
     #binding pry
     @tasks = @tasks.order(priority: "ASC") if params[:sort_priority]
+    @tasks = @tasks.joins(:labels).where( labels: {id: params[:label_id]}) if params[:label_id].present?
     if params[:search]
       #if params[:search][:title_search].present? && params[:search][:status_search].present?
-        @tasks = @tasks.search_and(params[:search][:title_search], params[:search][:status_search]).status_search(params[:search][:status_search]).title_search(params[:search][:title_search])
+      @tasks = @tasks.search_and(params[:search][:title_search], params[:search][:status_search]).status_search(params[:search][:status_search]).title_search(params[:search][:title_search])
+      #binding pry
       #elsif params[:search][:status_search].present?
         #@tasks = Task.status_search(params[:search][:status_search])
       #elsif  params[:search][:title_search].present?
@@ -31,6 +33,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+    @task = Task.find(params[:id])
   end
 
   # POST /tasks or /tasks.json
@@ -72,13 +75,13 @@ class TasksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_task
-      @task = Task.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_task
+    @task = Task.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def task_params
-      params.require(:task).permit(:title, :content, :created_at, :deadline, :status, :priority)
-    end
+  # Only allow a list of trusted parameters through.
+  def task_params
+    params.require(:task).permit(:title, :content, :created_at, :deadline, :status, :priority, :name, { label_ids: [] })
+  end
 end
