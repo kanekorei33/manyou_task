@@ -33,6 +33,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+    @task = Task.find(params[:id])
   end
 
   # POST /tasks or /tasks.json
